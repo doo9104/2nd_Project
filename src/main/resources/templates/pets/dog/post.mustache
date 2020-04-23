@@ -1,0 +1,20 @@
+{{>layout/header}}
+<section id="portfolio" class="portfolio">
+    <div class="container" style="margin-top: 30px;">
+        <form>
+            <small>제목</small>
+            <input class="form-control" type="text" id="title" name="title"/>
+            <small>내용</small>
+            <textarea class="form-control" id="content" name="content"></textarea>
+            <small>작성자</small>
+            <input class="form-control" type="text" id="writer" name="writer"/>
+        </form>
+        <button class="btn btn-primary" type="button" id="btn-save">등록</button>
+    </div>
+</section>
+
+<div class="d-lg-none scroll-to-top position-fixed rounded"><a
+        class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
+        class="fa fa-chevron-up"></i></a></div>
+
+{{>layout/footer}}

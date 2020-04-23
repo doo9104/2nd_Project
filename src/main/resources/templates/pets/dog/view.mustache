@@ -1,0 +1,23 @@
+{{>layout/header}}
+<section id="portfolio" class="portfolio">
+    <div class="container" style="margin-top: 30px;">
+        <form>
+            <small>글 번호</small>
+            <input class="form-control" type="text" id="id" name="id" value="{{post.id}}" readonly/>
+            <small>제목</small>
+            <input class="form-control" type="text" id="title" name="title" value="{{post.title}}" readonly/>
+            <small>내용</small>
+            <textarea class="form-control" id="content" name="content" readonly>{{post.content}}</textarea>
+            <small>작성자</small>
+            <input class="form-control" type="text" id="writer" name="writer" value="{{post.writer}}" readonly/>
+        </form>
+        <a class="btn btn-primary" type="button" href="/dog/modify/{{post.id}}" >수정</a>
+        <button class="btn btn-primary" type="button" id="btn-delete">삭제</button>
+    </div>
+</section>
+
+<div class="d-lg-none scroll-to-top position-fixed rounded"><a
+        class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
+        class="fa fa-chevron-up"></i></a></div>
+
+{{>layout/footer}}
