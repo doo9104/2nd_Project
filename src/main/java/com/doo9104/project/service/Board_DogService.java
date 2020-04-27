@@ -7,6 +7,10 @@ import com.doo9104.project.web.dto.DogListResponseDto;
 import com.doo9104.project.web.dto.DogPostResponseDto;
 import com.doo9104.project.web.dto.DogUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +28,14 @@ public class Board_DogService {
     public Long save(DogDto dogDto) {
         return boardDogRepository.save(dogDto.toEntity()).getId();
     }
+
+
+    public Page<Board_Dog> findBoardList(Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(),new Sort(Sort.Direction.DESC, "id"));
+
+        return boardDogRepository.findAll(pageable);
+    }
+
 
     @Transactional
     public Long update(Long id, DogUpdateRequestDto dogUpdateRequestDto) {
@@ -56,6 +68,7 @@ public class Board_DogService {
 
         boardDogRepository.delete(boardDog);
     }
+
 
 
 
