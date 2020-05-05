@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PSMP - Join</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        @font-face {
+            font-family: 'GmarketSansLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff'); font-weight: normal; font-style: normal;
+        }
+    </style>
+
+</head>
+<script src="/assets/js/jquery.min.js"></script>
+<body>
+
+<img class="wave" src="/assets/img/login-wave.png">
+<div class="container">
+    <div class="img">
+        <img src="/assets/img/join-bg.svg">
+    </div>
+
+    <div class="login-content">
+        <form id="step1">
+            <img src="/assets/img/icon_cat.png">
+            <h2 class="title">Welcome</h2>
+            <h5 class="title">Step 1 / 2</h5>
+
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="div">
+                    <h5>ID</h5>
+                    <input type="text" id="userid" class="input">
+                </div>
+            </div>
+
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                    <h5>Password</h5>
+                    <input type="password" id="password" class="input">
+                </div>
+            </div>
+
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                    <h5>Password Confirm</h5>
+                    <input type="password" class="input">
+                </div>
+            </div>
+
+
+            <a href="/login">Already Have ID?</a>
+            <input type="submit" class="btn" id="btn-next" value="Next">
+        </form>
+
+        <!-- STEP 2-->
+        <form id="step2">
+            <img src="/assets/img/icon_other.png">
+            <h2 class="title">Welcome</h2>
+            <h5 class="title">Step 2 / 2</h5>
+
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="div">
+                    <h5>Username</h5>
+                    <input type="text" id="username" class="input">
+                </div>
+            </div>
+
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="div">
+                    <h5>Email</h5>
+                    <input type="email" id="email" class="input">
+                </div>
+            </div>
+
+
+            <a href="/login">Already Have ID?</a>
+            <input type="submit" class="btn" id="btn-prev" value="PREVIOUS">
+            <input type="submit" class="btn" id="btn-join" value="JOIN">
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#step2').hide();
+
+</script>
+<script type="text/javascript" src="/assets/js/logindesign.js"></script>
+<script src="/js/app/join.js"></script>
+</body>
+</html>

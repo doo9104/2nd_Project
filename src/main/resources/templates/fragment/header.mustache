@@ -47,7 +47,16 @@
                 <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">인기 펫</a></li>
                 <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
                 <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
-            </ul><button class="btn btn-primary btn-sm" data-bs-hover-animate="tada" type="button" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그인</button><button class="btn btn-primary btn-sm" data-bs-hover-animate="tada"
-                                                                                                                                                                                                 type="button" style="margin-left: 0px;">회원가입</button></div>
+            </ul>
+            {{#curUser}}
+                <span>Login :</span> <span id="user">{{curUser}} </span>
+                <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그아웃</button>
+            {{/curUser}}
+            {{^curUser}}
+            <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그인</button>
+            <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/join'" style="margin-left: 0px;">회원가입</button>
+            {{/curUser}}
+                <!--data-bs-hover-animate="tada"-->
+        </div>
     </div>
 </nav>

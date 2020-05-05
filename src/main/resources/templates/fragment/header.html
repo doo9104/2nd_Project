@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html	lang="ko"
+         xmlns:th="http://www.thymeleaf.org"
+         xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<header th:fragment="headerFragment">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/">
+                <i class="fas fa-dog"></i>PSMP<i class="fas fa-cat"></i></a>
+            <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" style="padding: 16px;padding-right: 0px;padding-left: 0px;margin-right: 10px;">구경하기</a>
+                        <div role="menu" class="dropdown-menu">
+                            <a role="presentation" class="dropdown-item" href="/dog">
+                                <i class="fas fa-dog" style="color: rgb(255,92,0);"></i>
+                                댕댕이
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="/cat">
+                                <i class="fas fa-cat" style="color: rgb(245,215,72);"></i>
+                                야옹이
+                            </a>
+                            <a role="presentation" class="dropdown-item" href="/other">
+                                <i class="fa fa-star" style="color: rgb(103,174,245);"></i>
+                                다른 동물
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">인기 펫</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
+                </ul>
+
+                <div sec:authorize="!isAuthenticated()">
+                 <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그인</button>
+                 <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/join'" style="margin-left: 0px;">회원가입</button>
+                </div>
+
+                <div sec:authorize="isAuthenticated()">
+                    <span sec:authentication="principal.username"></span>
+                    <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</html>

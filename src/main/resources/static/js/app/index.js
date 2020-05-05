@@ -38,6 +38,7 @@ var main = {
     update : function () {
         var data = {
             title : $('#title').val(),
+            writer : $('#writer').val(),
             content : $('#content').val()
         };
 

@@ -5,6 +5,7 @@ import com.doo9104.project.web.dto.DogDto;
 import com.doo9104.project.web.dto.DogPostResponseDto;
 import com.doo9104.project.web.dto.DogUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +30,11 @@ public class PostApiController {
         return boardDogService.save(dogDto);
     }
 
+
+    @PreAuthorize("#dogUpdateRequestDto.getWriter() == authentication.principal.username")
     @PutMapping("/post/{id}")
     public Long update(@PathVariable Long id, @RequestBody DogUpdateRequestDto dogUpdateRequestDto) {
+       System.out.println("test test test : " +dogUpdateRequestDto.getWriter());
         return boardDogService.update(id, dogUpdateRequestDto);
     }
 

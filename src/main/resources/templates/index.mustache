@@ -1,4 +1,10 @@
-{{>layout/header}}
+<!--{{>layout/header}}-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+</html>
 
 <header class="masthead bg-primary text-white text-center">
     <div class="row" style="font-family: GmarketSansLight;max-width: 1200px;cursor: pointer;margin-right: auto;margin-left: auto;">
@@ -9,6 +15,7 @@
         <div class="col-md-4" data-toggle="tooltip" data-placement="top" data-bs-hover-animate="jello" title="다른 동물 보러가기" onclick="location.href='/other';"><img src="./assets/img/icon_other.png" style="width: 256px;">
             <h1 style="margin-top: 15px;">다른 동물</h1><span style="font-size: 23px;">우리들도 한매력한다구</span></div>
     </div>
+
 </header>
 <section id="portfolio" class="portfolio">
     <div class="container">
@@ -225,7 +232,8 @@
 <script type="text/javascript">
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
-    })
+    });
+
 </script>
 
 

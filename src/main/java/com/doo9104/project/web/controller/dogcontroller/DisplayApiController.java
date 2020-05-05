@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,8 @@ public class DisplayApiController {
         model.addAttribute("posts",boardDogService.findBoardList(pageable));
 
         return "/pets/dog/pet_dog";
-
     }
+
     @GetMapping("/dog/post")
     public String dog_post() {
         return "/pets/dog/post";
@@ -43,6 +45,7 @@ public class DisplayApiController {
     @GetMapping("/dog/modify/{id}")
     public String updateView(@PathVariable Long id, Model model) {
         DogPostResponseDto dto = boardDogService.findById(id);
+
         model.addAttribute("post",dto);
 
         return "/pets/dog/modify";
