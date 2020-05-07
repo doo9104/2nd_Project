@@ -1,5 +1,6 @@
 package com.doo9104.project.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class User extends TimeEntity implements UserDetails {
     @Column(length = 300, nullable = false)
     private String nickname;
 
+    @JsonIgnore // 비밀번호는 client에 전달이 안되도록 한다.(jackson annotation)
     @Column(length = 300, nullable = false)
     private String password;
 
@@ -60,7 +62,6 @@ public class User extends TimeEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-       // return email;
         return userid;
     }
 

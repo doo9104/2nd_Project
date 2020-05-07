@@ -23,9 +23,15 @@
         <div layout:fragment="content"></div>
         <!-- [content] 영역 끝 -->
 
+        <!-- custom javascript 시작 -->
+        <th:block layout:fragment="script"></th:block>
+        <!-- custom javascript 끝 -->
+
         <!-- [footer] 영역 시작 -->
         <footer th:replace="fragment/footer :: footerFragment"></footer>
         <!-- [footer] 영역 끝 -->
+
+
     </body>
 
 </html>
