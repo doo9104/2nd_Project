@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
@@ -42,8 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/assets/**");
     }
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/dog/post").hasAnyRole("ADMIN","USER")
+                /*.antMatchers("/dog/post").hasAnyRole("ADMIN","USER")*/
                 .antMatchers("/user/").hasRole("USER")
                 .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
                 .antMatchers("/","/login","/join","/dog").permitAll()
@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                /*.successHandler(successHandler())*/
                 .usernameParameter("userid")
                 .passwordParameter("password")
                 .loginProcessingUrl("/")
@@ -77,7 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
 
 
+
+
     }
 
+   /* @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new LoginSuccessHandler("/");//default로 이동할 url
+    }*/
 
 }

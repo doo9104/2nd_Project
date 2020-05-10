@@ -25,10 +25,10 @@ public class Comment_Dog extends TimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT",nullable = false)
+    @Column(length = 1000,columnDefinition = "TEXT",nullable = false)
     private String content;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 15, nullable = false)
     private String writer;
 
     @JsonIgnore

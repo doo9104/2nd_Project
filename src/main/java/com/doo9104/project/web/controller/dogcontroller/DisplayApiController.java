@@ -30,6 +30,7 @@ public class DisplayApiController {
         return "/pets/dog/pet_dog";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/dog/post")
     public String dog_post() {
         return "/pets/dog/post";

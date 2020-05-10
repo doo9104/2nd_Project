@@ -3,9 +3,12 @@ package com.doo9104.project.web.controller.dogcontroller;
 import com.doo9104.project.domain.entity.Board_Dog;
 import com.doo9104.project.domain.entity.Comment_Dog;
 import com.doo9104.project.domain.entity.Comment_DogRepository;
+import com.doo9104.project.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,8 +68,8 @@ public class CommentController {
 
 
     @Transactional
-    @PutMapping("/dog/{id}")
-    public ResponseEntity<List<Comment_Dog>> modifyComment(@PathVariable("id") Long id, @RequestBody Comment_Dog comment_dog) {
+    @PutMapping("/dog/{bid}") /*게시물 번호*/
+    public ResponseEntity<List<Comment_Dog>> modifyComment(@PathVariable("bid") Long bid, @RequestBody Comment_Dog comment_dog) {
         //값이 있으면 코드 블록을 실행 함
         comment_dogRepository.findById(comment_dog.getId()).ifPresent(origin -> {
             origin.SetCommentContent(comment_dog.getContent());
@@ -74,9 +77,14 @@ public class CommentController {
         });
 
         Board_Dog boardDog = new Board_Dog();
-        boardDog.SetBoardId(id);
+        boardDog.SetBoardId(bid);
 
         return new ResponseEntity<>(getListByBoard(boardDog), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/dog/commentLikeUp")
+    public void commentLikeUp(@RequestBody Comment_Dog comment_dog) {
+
     }
 
 }

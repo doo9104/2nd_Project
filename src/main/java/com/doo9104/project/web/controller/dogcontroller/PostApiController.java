@@ -25,6 +25,7 @@ public class PostApiController {
     private final Board_DogService boardDogService;
 
 
+
     @PostMapping("/post")
     public Long post(@RequestBody DogDto dogDto) {
         return boardDogService.save(dogDto);

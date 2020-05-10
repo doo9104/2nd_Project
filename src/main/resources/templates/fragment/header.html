@@ -42,8 +42,8 @@
                 </div>
 
                 <div sec:authorize="isAuthenticated()">
-                    <span sec:authentication="principal.username"></span>
-                    <button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그아웃</button>
+                    <span sec:authentication="principal.nickname"></span>
+                    <!--<button class="btn btn-primary btn-sm"  type="button" onclick = "location.href = '/login'" style="margin: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;">로그아웃</button>-->
                 </div>
             </div>
         </div>
