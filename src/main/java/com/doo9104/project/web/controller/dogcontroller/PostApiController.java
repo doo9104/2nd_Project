@@ -35,7 +35,6 @@ public class PostApiController {
     @PreAuthorize("#dogUpdateRequestDto.getWriter() == authentication.principal.username")
     @PutMapping("/post/{id}")
     public Long update(@PathVariable Long id, @RequestBody DogUpdateRequestDto dogUpdateRequestDto) {
-       System.out.println("test test test : " +dogUpdateRequestDto.getWriter());
         return boardDogService.update(id, dogUpdateRequestDto);
     }
 

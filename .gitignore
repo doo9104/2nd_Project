@@ -5,3 +5,5 @@
 application.properties
 /src/main/resources/application.properties
 /src/main/resources/
+/etc/
+/src/main/resources/application.properties
