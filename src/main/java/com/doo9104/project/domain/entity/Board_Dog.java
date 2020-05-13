@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Getter
@@ -34,8 +37,11 @@ public class Board_Dog extends TimeEntity {
     @Column(columnDefinition = "TEXT",nullable = false)
     private String content;
 
+    @ColumnDefault("0")
+    private int likeCount;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "board_dog", fetch = FetchType.LAZY) // 불필요하게 양쪽 테이블을 조회 하지 않도록 양쪽 모두 '지연 로딩' 방식 설정
+    @OneToMany(mappedBy = "board_dog", fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 불필요하게 양쪽 테이블을 조회 하지 않도록 양쪽 모두 '지연 로딩' 방식 설정
     private List<Comment_Dog> comments;
 
 

@@ -2,6 +2,10 @@ package com.doo9104.project.service;
 
 import com.doo9104.project.domain.entity.Board_DogRepository;
 import com.doo9104.project.domain.entity.Board_Dog;
+import com.doo9104.project.domain.entity.Board_Dog_Like;
+import com.doo9104.project.domain.entity.Board_Dog_LikeRepository;
+import com.doo9104.project.domain.entity.IsUse;
+import com.doo9104.project.domain.entity.UserRepository;
 import com.doo9104.project.web.dto.DogDto;
 import com.doo9104.project.web.dto.DogListResponseDto;
 import com.doo9104.project.web.dto.DogPostResponseDto;
@@ -22,6 +26,10 @@ import java.util.stream.Collectors;
 public class Board_DogService {
 
     private final Board_DogRepository boardDogRepository;
+
+    private final Board_Dog_LikeRepository boardDogLikeRepository;
+
+
 
 
     @Transactional
@@ -71,13 +79,43 @@ public class Board_DogService {
 
 
 
+    public void toggleLike(Long boardId, String userId) {
+        Board_Dog_Like preLike = boardDogLikeRepository.findByBoardIdAndUserId(boardId,userId);
+        Board_Dog_Like newOrModLike = null;
+        if(preLike == null){ // 처음 추천일때
+            newOrModLike = this.newLike(boardId,userId);
+        }else{ // 이미 추천했을때
+            newOrModLike = this.modifyLike(preLike);
+        }
+        boardDogLikeRepository.save(newOrModLike);
+    }
 
+    private Board_Dog_Like newLike(Long boardId, String userId){
+        Board_Dog_Like newLike = new Board_Dog_Like();
+        newLike.setBoardId(boardId);
+        newLike.setUserId(userId);
+        newLike.setIsUse(IsUse.Y);
+        boardDogRepository.LikeUp(boardId);
 
+        return newLike;
+    }
 
+    private Board_Dog_Like modifyLike(Board_Dog_Like preLike){
+        Board_Dog_Like modLike = null;
+        if(preLike.getIsUse().equals(IsUse.Y)) {
+            boardDogRepository.LikeDown(preLike.getBoardId());
+        } else {
+            boardDogRepository.LikeUp(preLike.getBoardId());
+        }
+        IsUse inverseIsUse = preLike.getIsUse().inverse();
+        modLike = preLike;
+        modLike.setIsUse(inverseIsUse);
+        return modLike;
+    }
 
-
-
-
+    public int getLikeCount(Long boardId) {
+        return boardDogRepository.getLikeCount(boardId);
+    }
 
 
 

@@ -19,6 +19,7 @@
                 <input class="form-control" type="text" id="writer" name="writer" th:value="${post.writer}" readonly/>
             </form>
 
+
             <div sec:authorize="isAuthenticated()" th:if="${#authentication.getName() == post.writer}">
                 <a class="btn btn-primary" type="button"  th:href="@{'/dog/modify/' + ${post.id}}" >수정</a>
                 <button class="btn btn-primary" type="button" id="btn-delete">삭제</button>
@@ -27,6 +28,25 @@
             <div th:unless="${#authentication.getName() == post.writer}">
                 <a class="btn btn-primary" type="button"  href="/dog" >목록</a>
             </div>
+
+            <!---->
+
+            <button id="btn-like" class="button1 center-block">
+                <div class="icon">
+                    <div class="cannon"></div>
+                    <div class="confetti">
+                        <svg viewBox="0 0 18 16">
+                            <polyline points="1 10 4 7 4 5 6 1" />
+                            <path d="M4,13 C5.33333333,9 7,7 9,7 C11,7 12.3340042,6 13.0020125,4" />
+                            <path d="M6,15 C7.83362334,13.6666667 9.83362334,12.6666667 12,12 C14.1663767,11.3333333 15.8330433,9.66666667 17,7" />
+                        </svg>
+                        <i></i><i></i><i></i><i></i><i></i><i></i>
+                        <div class="emitter"></div>
+                    </div>
+                </div>
+                <span>추천!</span> <span id="likeCountSpan" th:text="${post.likeCount}"></span>
+            </button>
+            <!---->
 
         </div>
 
@@ -73,6 +93,8 @@
 
 <th:block layout:fragment="script">
 <script th:inline="javascript" th:src="@{'/js/app/comments.js'}"></script>
+    <script th:inline="javascript" th:src="@{'/assets/js/LikeBtnJS.js'}"></script>
+
 
     <!-- 기본 -->
     <script th:inline="javascript">
@@ -101,7 +123,7 @@
                     "</div>"+
                     "<span data-commentno="+commentObj.id+ " class=\"commentContent\" style=\"color: #ffffff;margin-top: 5px;margin-bottom: 5px;\">"+commentObj.content+"</span>"+
                     "</div>" +
-                    "<a id=\"btn-commentlike\" href=\"/\" style=\"color: rgb(255,255,255);font-size: 25px;\"><i data-toggle=\"tooltip\" title=\"추천\" class=\"fas fa-thumbs-up\">"+commentObj.board_dog_id+"</i></a>&nbsp;&nbsp;&nbsp;";
+                    "<a id=\"btn-commentlike\" href=\"/\" style=\"color: rgb(27,33,45);font-size: 25px\"><i class=\"fas fa-thumbs-up\"></i></a>&nbsp;&nbsp;&nbsp;";
 
 
                 /* 삭제 */
@@ -130,6 +152,9 @@
                 + "-" + (date.getDate() >= 10?date.getDate() : '0'+ (date.getDate()) )
                 + " / " + date.getHours() + ":" + date.getMinutes()
         }
+
+
+
     </script>
 
     <!-- 회원일때-->
@@ -147,13 +172,14 @@
         //var writer = [[${#authentication.getName()}]];
         //var test = [[${#authentication.principal.nickname}]];
 
+
         // 댓글 등록/수정
         $('#btn-add').on('click',function () {
 
             if(commentMode == true) { // 글쓰기 모드일때
                 var writer = [[${#authentication.principal.nickname}]];
                 var content = $('#cContent').val();
-                var obj = {content:content, writer: writer, id:bid};
+                var obj = {content:content, writer: writer, id:bid, like_count:"0"};
 
                 commentsmanager.add(obj, function(list){
                     bootbox.alert("댓글을 등록하였습니다.");
@@ -206,35 +232,31 @@
                     }
                 }
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         });
 
-
-
-
-
+        // 좋아요
+        $("#btn-like").click(function(){
+            var obj = {boardId:bid};
+            $.ajax({
+                type : 'post',
+                url : '/dog/' + bid + '/like',
+                data : JSON.stringify(obj),
+                dataType : 'json',
+                contentType: "application/json",
+                success:function(result) {
+                    $("#likeCountSpan").html(result);
+                },
+            });
+        });
     </script>
 
     <!-- 익명사용자일때-->
    <script sec:authorize="isAnonymous()" th:inline="javascript">
        // 댓글 등록
-       $('#btn-add').on('click',function () {
+       $('#btn-add,#btn-like').on('click',function () {
            bootbox.confirm({
                title: "로그인",
-               message: "로그인 후에 작성할 수 있습니다. 로그인 하시겠습니까?",
+               message: "로그인 후에 가능합니다. 로그인 하시겠습니까?",
                buttons: {
                    cancel: { label: '<i class="fa fa-times"></i> 취소' },
                    confirm: { label: '<i class="fa fa-check"></i> 로그인' }
@@ -247,10 +269,6 @@
            });
        });
 
-       $(document).on("click","#btn-commentlike",function(e){
-           e.preventDefault();
-           bootbox.alert("로그인한 유저만 추천할 수 있습니다.");
-       });
 
 
     </script>

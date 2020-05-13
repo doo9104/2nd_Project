@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 
 @Getter
 @NoArgsConstructor
@@ -36,8 +35,6 @@ public class Comment_Dog extends TimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Board_Dog board_dog;
 
-    @Transient
-    private int likecount;
 
 
     // getter & setter
@@ -49,5 +46,6 @@ public class Comment_Dog extends TimeEntity {
     public void SetCommentContent(String content) {
         this.content = content;
     }
+
 
 }

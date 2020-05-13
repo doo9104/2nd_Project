@@ -3,8 +3,6 @@ package com.doo9104.project.web.controller.dogcontroller;
 import com.doo9104.project.domain.entity.Board_Dog;
 import com.doo9104.project.domain.entity.Comment_Dog;
 import com.doo9104.project.domain.entity.Comment_DogRepository;
-import com.doo9104.project.domain.entity.like_CommentDog;
-import com.doo9104.project.service.Comment_DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +25,6 @@ public class CommentController {
     @Autowired
     private Comment_DogRepository comment_dogRepository;
 
-    @Autowired
-    private Comment_DogService comment_dogService;
 
     private List<Comment_Dog> getListByBoard(Board_Dog boardDog) throws RuntimeException{
         System.out.println("getListByBoard ID : "+ boardDog.getId());
@@ -84,16 +80,8 @@ public class CommentController {
         return new ResponseEntity<>(getListByBoard(boardDog), HttpStatus.CREATED);
     }
 
-    @PostMapping("/dog/commentLikeUp")
-    public void commentLikeUp(@RequestBody like_CommentDog like_commentDog) {
-        System.out.println("boardId : " + like_commentDog.getBoardId());
-        System.out.println("CommentId : " + like_commentDog.getCommentId());
-        System.out.println("memberId : " + like_commentDog.getMemberId());
-        int likeCount = comment_dogService.findAllReceivedLikeCount(like_commentDog.getBoardId(),like_commentDog.getCommentId());
 
-        System.out.println("like count : " + likeCount);
-        //comment_dogService.toggleLike(like_commentDog.getBoardId(),like_commentDog.getCommentId(),like_commentDog.getMemberId());
 
-    }
+
 
 }
