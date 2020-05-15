@@ -20,6 +20,7 @@ var main = {
             content : $('#content').val()
         };
 
+        console.log(data.content);
         $.ajax({
             type : 'POST',
             url : '/dog/post',
