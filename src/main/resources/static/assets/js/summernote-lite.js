@@ -5871,7 +5871,7 @@ function () {
         _this3.getLastRange().insertNode($image[0]);
 
         _this3.setLastRange(range.createFromNodeAfter($image[0]).select());
-
+        /*_this3.setLastRange(range.createFromNodeAfter($image[0]).pasteHTML('<br/><br/><br/>').select());*/
         _this3.afterCommand();
       }).fail(function (e) {
         _this3.context.triggerEvent('image.upload.error', e);
@@ -7828,6 +7828,8 @@ function () {
           click: _this3.context.createInvokeHandler('editor.removeMedia')
         }).render();
       });
+
+
     }
   }, {
     key: "addLinkPopoverButtons",

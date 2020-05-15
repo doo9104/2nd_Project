@@ -17,7 +17,8 @@ var main = {
         var data = {
             title : $('#title').val(),
             writer : $('#writer').val(),
-            content : $('#content').val()
+            content : $('#content').val(),
+            thumbnailsrc : img
         };
 
         console.log(data.content);

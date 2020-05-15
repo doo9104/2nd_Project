@@ -15,17 +15,20 @@ public class DogDto {
     private String writer;
     private String title;
     private String content;
+    private String thumbnailsrc;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
     @Builder
-    public DogDto(String title, String content, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public DogDto(String title, String content, String writer, String thumbnailsrc, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.writer = writer;
         this.title = title;
         this.content = content;
+        this.thumbnailsrc = thumbnailsrc;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
     }
+
 
 
     public Board_Dog toEntity() {
@@ -33,6 +36,7 @@ public class DogDto {
                 .writer(writer)
                 .title(title)
                 .content(content)
+                .thumbnailsrc(thumbnailsrc)
                 .build();
     }
 

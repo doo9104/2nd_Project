@@ -1,5 +1,6 @@
 package com.doo9104.project.web.controller.dogcontroller;
 
+import com.doo9104.project.domain.entity.Board_Dog;
 import com.doo9104.project.domain.entity.Board_Dog_Like;
 import com.doo9104.project.domain.entity.Comment_Dog;
 import com.doo9104.project.service.Board_DogService;

@@ -33,6 +33,7 @@ public class CommentController {
 
     @GetMapping("/dog/{id}")
     public ResponseEntity<List<Comment_Dog>> getComment(@PathVariable("id") Long id) {
+        System.out.println("컨트롤러 호출됨");
         Board_Dog boardDog = new Board_Dog();
         boardDog.SetBoardId(id);
         return ResponseEntity.ok(getListByBoard(boardDog));

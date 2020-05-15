@@ -147,7 +147,7 @@ return /******/ (function(modules) { // webpackBootstrap
         maximumFileSizeError: '최대 파일 크기를 초과했습니다.',
         url: '사진 URL',
         remove: '사진 삭제',
-        original: '원본'
+        original: '원본',
       },
       video: {
         video: '동영상',

@@ -36,6 +36,9 @@ public class Board_Dog extends TimeEntity {
     @Column(columnDefinition = "TEXT",nullable = false)
     private String content;
 
+    @Column(columnDefinition = "TEXT")
+    private String thumbnailsrc;
+
     @ColumnDefault("0")
     private int likeCount;
 
@@ -45,9 +48,10 @@ public class Board_Dog extends TimeEntity {
 
 
     @Builder
-    public Board_Dog(String title, String content, String writer) {
+    public Board_Dog(String title, String content, String thumbnailsrc,String writer) {
         this.title = title;
         this.content = content;
+        this.thumbnailsrc = thumbnailsrc;
         this.writer = writer;
     }
 

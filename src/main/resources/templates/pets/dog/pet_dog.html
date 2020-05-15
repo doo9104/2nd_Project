@@ -14,7 +14,8 @@
                     <a class="d-block mx-auto portfolio-item"  th:href="'/dog/'+${board.id}">
                         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
                             <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="./assets/img/cake.png" style="max-height: 252.76px;"/>
+                        </div>
+                        <img class="img-fluid" th:src="${board.thumbnailsrc}" style="min-height: 252.76px;"/>
                         <h5 class="text-center" th:text="${board.title}"></h5>
                     </a>
                 </div>
@@ -60,5 +61,12 @@
 
 
 </div>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        </script>
+</th:block>
+
 
 </html>
