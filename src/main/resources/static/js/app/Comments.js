@@ -3,13 +3,6 @@ var commentsmanager = (function () {
         console.log("getting all...");
 
         $.getJSON('/comments/dog/'+obj, callback);
-      /*  $.ajax({
-            type : 'get',
-            url : '/comments/dog/' + obj,
-            dataType : 'json',
-            contentType: "application/json",
-            success:callback
-        });*/
     };
 
     // 댓글 추가

@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,8 +47,14 @@ public class User extends TimeEntity implements UserDetails {
     @Column(length = 300, nullable = false)
     private String password;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private IsUse isUse;
+
+    @Column(length = 50)
+    private String authkey;
 
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -59,6 +67,12 @@ public class User extends TimeEntity implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
+
+    public void accountActive(IsUse isUse,String authkey) {
+        this.isUse = isUse.inverse();
+        this.authkey = null;
+    }
+
 
     @Override
     public String getUsername() {

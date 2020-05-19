@@ -1,4 +1,4 @@
-package com.doo9104.project.config;
+package com.doo9104.project.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;

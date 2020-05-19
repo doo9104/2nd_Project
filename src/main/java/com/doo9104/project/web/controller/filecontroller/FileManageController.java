@@ -85,34 +85,27 @@ public class FileManageController {
     @PostMapping(value = "/deleteSummernoteImageFile")
     @ResponseBody
     public ResponseEntity<String> deleteSummernoteImageFile(String src) throws UnsupportedEncodingException{
-       System.out.println("호출되어땅! : " + src);
 
         File file;
-
-
         String path = src.replace("http://localhost:8080/summernoteImage","c:\\summernote_image");
         // 한글 파일이 있을수도 있으니 디코딩 한다음 처리.
         path = URLDecoder.decode(path,"UTF-8");
         file = new File(path);
 
-
-        System.out.println("url인코딩 결과 : " + path);
-
         try {
             if( file.exists() ){
                 if(file.delete()){
-                    System.out.println("파일삭제 성공");
-                }else {
-                    System.out.println("파일삭제 실패");
+                }else { // 파일 삭제 실패
+                    return new ResponseEntity<String>("failed",HttpStatus.BAD_REQUEST);
                 }
-            }else{
-                System.out.println("파일이 존재하지 않습니다.");
+            }else{ // 파일 존재하지않음
+                return new ResponseEntity<String>("file not found",HttpStatus.NOT_FOUND);
             }
         } catch(Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<String>("deleted",HttpStatus.OK);
+        return new ResponseEntity<String>("successfully deleted",HttpStatus.OK);
     }
 
 
