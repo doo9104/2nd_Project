@@ -113,10 +113,27 @@ public class Board_DogService {
         return modLike;
     }
 
+    // 게시글 좋아요 갯수 가져오기
     public int getLikeCount(Long boardId) {
         return boardDogRepository.getLikeCount(boardId);
     }
 
+    // 검색
+    public Page<Board_Dog> searchBoardList(Pageable pageable,String type,String keyword) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(),new Sort(Sort.Direction.DESC, "id"));
+
+        if (type.equals("T")) {
+            return boardDogRepository.findByTitleContains(pageable,keyword);
+        } else if (type.equals("C")) {
+            return boardDogRepository.findByContentContains(pageable,keyword);
+        } else if (type.equals("TC")) {
+            return boardDogRepository.findByTitleContainsOrContentContains(pageable,keyword,keyword);
+        } else if (type.equals("W")){
+            return boardDogRepository.findByWriterContains(pageable,keyword);
+        } else { // 다른값 들어오면 전체 글 가져오기
+            return boardDogRepository.findAll(pageable);
+        }
+    }
 
 
 }

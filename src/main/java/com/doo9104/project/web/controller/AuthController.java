@@ -79,7 +79,7 @@ public class AuthController {
         //아이디&이메일로 확인후
         // authkey 일치하면 isUse Y로
         User member = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 ID 입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 이메일 입니다."));
 
         if(authkey.equals(member.getAuthkey())) {
             // isUse를 Y로 변경하고 authkey를 비운다
@@ -96,25 +96,21 @@ public class AuthController {
     @PostMapping("/loginprocess")
     public String login(@RequestBody Map<String, String> user, HttpServletResponse response) {
             //String , ResponseEntity<?>
-        System.out.println("로그인 호출");
 
         User member = userRepository.findByUserid(user.get("userid"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
 
-        if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
-            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        if(member.getIsUse().equals(IsUse.N)) { return "NotAuth"; }
+        else if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
+            return "WrongInfo";
         }
-
-        System.out.println("member.getUserid() : " + member.getUserid());
-        System.out.println("member.getPassword() : " + member.getPassword());
 
         String token = jwtUtil.createToken(member.getUserid(), member.getRoles());
         response.setHeader("X-AUTH-TOKEN", token);
 
-        Cookie setCookie = new Cookie("X-AUTH-TOKEN", token); // 쿠키 이름을 name으로 생성
+        Cookie setCookie = new Cookie("X-AUTH-TOKEN", token); // 쿠키 생성
         setCookie.setMaxAge(60*60*24); // 기간을 하루로 지정
         response.addCookie(setCookie);
-        System.out.println("token : " + token);
         return token;
         /*return ResponseEntity.ok(jwtUtil.createToken(member.getUserid(), member.getRoles()));*/
     }
