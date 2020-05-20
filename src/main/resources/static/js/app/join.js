@@ -44,17 +44,10 @@ var join = {
             type : 'POST',
             url : '/join',
             contentType : 'application/json; charset=utf-8',
-            data : JSON.stringify(data),
-            beforeSend:function(){
-                $('body').loading({
-                    stoppable: false
-                });},
-            complete:function(){
-                $('body').loading('stop');
-            }
+            data : JSON.stringify(data)
         }).done(function () {
-            alert('인증을 위한 이메일이 발송되었습니다. 메일을 확인해주세요.');
-            //window.location.href = '/login';
+            alert('회원가입 되었습니다.');
+            window.location.href = '/login';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

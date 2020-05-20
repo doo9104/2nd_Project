@@ -55,18 +55,4 @@ public class DisplayApiController {
         return "/pets/dog/modify";
     }
 
-
-    @GetMapping("/dog/search")
-    public String searchBoardList(@RequestParam(value = "keyword") String keyword,
-                       @RequestParam(value = "type") String type,
-                       @PageableDefault(size = 6 ) Pageable pageable,
-                       Model model) {
-        model.addAttribute("posts",boardDogService.searchBoardList(pageable,type,keyword));
-        model.addAttribute("type",type);
-        model.addAttribute("keyword",keyword);
-
-
-        return "/pets/dog/pet_dog";
-    }
-
 }
