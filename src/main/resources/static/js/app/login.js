@@ -22,6 +22,11 @@ var login = {
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function (data) {
+            if(data == "NotAuth") {
+                alert("인증되지 않은 계정입니다."); return;
+            } else if(data == "WrongInfo") {
+                alert("입력하신 아이디&비밀번호가 맞지 않습니다."); return;
+            }
             console.log("success : " + JSON.stringify(data));
             window.location.href = '/';
         }).fail(function (error) {

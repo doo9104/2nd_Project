@@ -32,4 +32,11 @@ public interface Board_DogRepository extends JpaRepository<Board_Dog, Long> {
     int getLikeCount(@Param("boardId") Long boardId);
 
 
+    /* 검색 */
+    Page<Board_Dog> findByTitleContains(Pageable pageable,String keyword); // T
+    Page<Board_Dog> findByContentContains(Pageable pageable,String keyword); // C
+    Page<Board_Dog> findByTitleContainsOrContentContains(Pageable pageable,String keyword1,String keyword2);// TC
+    Page<Board_Dog> findByWriterContains(Pageable pageable,String keyword); // W
+
+
 }

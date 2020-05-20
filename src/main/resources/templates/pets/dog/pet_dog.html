@@ -22,7 +22,7 @@
 
             </div>
 
-            <nav class="d-flex d-xl-flex justify-content-center justify-content-xl-center" style="margin-left: -1px;margin-right: 0px;font-size: 25px;font-family: GmarketSansLight;">
+            <nav class="d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center" style="margin-left: -1px;margin-right: 0px;font-size: 25px;font-family: GmarketSansLight;">
                 <ul id="pagination" class="pagination"
                 th:with="startNumber=${T(Math).floor(posts.number/10)}*10+1,
                         endNumber=(${posts.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${posts.totalPages}">
@@ -45,12 +45,27 @@
                     </li>
 
 
-
-
-
-
                 </ul>
             </nav>
+
+            <!--검색-->
+            <form action="/dog/search" method="get">
+            <div class="d-flex justify-content-sm-center justify-content-lg-center">
+                <select name="type" id="searchselect" class="border rounded" style="margin-right: 5px;">
+                    <option value="T" th:selected="${type} == 'T'">제목</option>
+                    <option value="C" th:selected="${type} == 'C'">내용</option>
+                    <option value="TC" th:selected="${type} == 'TC'">제목+내용</option>
+                    <option value="W" th:selected="${type} == 'W'">작성자</option>
+                </select>
+                <div class="float-none float-md-none d-xl-flex justify-content-xl-center mt-5 mt-md-0 search-area">
+                    <i class="fas fa-search float-left search-icon"></i>
+                    <input type="search" name="keyword" class="float-left custom-search-input" th:value="${keyword}" placeholder="Search" maxlength="15" />
+                    <button class="btn btn-link btn-sm" id="btn-search" type="submit">검색</button>
+                </div>
+            </div>
+            </form>
+            <!--검색-->
+
             <a class="btn btn-primary btn-lg float-right d-xl-flex" role="button" href="/dog/post">글작성</a>
         </div>
     </section>
@@ -64,8 +79,13 @@
 
 <th:block layout:fragment="script">
     <script th:inline="javascript">
+       /* $('#btn-search').on('click',function () {
+            alert("검색한것 : " + $("#searchselect option:selected").val());
+        });*/
 
-        </script>
+
+
+    </script>
 </th:block>
 
 
