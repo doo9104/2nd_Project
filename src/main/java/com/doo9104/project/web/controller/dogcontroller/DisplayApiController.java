@@ -64,7 +64,6 @@ public class DisplayApiController {
         model.addAttribute("type",type);
         model.addAttribute("keyword",keyword);
 
-
         return "/pets/dog/pet_dog";
     }
 
