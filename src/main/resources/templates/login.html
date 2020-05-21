@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>PSMP - Login</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/login-style.css">
@@ -43,5 +43,8 @@
 </div>
 <script type="text/javascript" src="/assets/js/logindesign.js"></script>
 <script src="/js/app/login.js"></script>
+<script th:inline="javascript">
+    var prevPage = [[${prevPage}]];
+</script>
 </body>
 </html>

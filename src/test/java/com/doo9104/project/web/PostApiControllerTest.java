@@ -1,10 +1,9 @@
 package com.doo9104.project.web;
 
-import com.doo9104.project.domain.entity.Board_Dog;
-import com.doo9104.project.domain.entity.Board_DogRepository;
-import com.doo9104.project.web.dto.DogDto;
-import com.doo9104.project.web.dto.DogUpdateRequestDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.doo9104.project.Board_Dog.domain.entity.Board_Dog;
+import com.doo9104.project.Board_Dog.domain.entity.Board_DogRepository;
+import com.doo9104.project.Board_Dog.dto.DogDto;
+import com.doo9104.project.Board_Dog.dto.DogUpdateRequestDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.After;
@@ -15,10 +14,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

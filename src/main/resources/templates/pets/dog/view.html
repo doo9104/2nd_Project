@@ -177,6 +177,7 @@
         var passcid;
         var commentMode = true; // 글쓰기 : true , 수정 : false
 
+
         // 댓글 추가후 입력란 비우고 댓글 불러오기
         function afterAll(list){
             printList(list);
@@ -250,7 +251,8 @@
 
         // 좋아요
         $("#btn-like").click(function(){
-            var obj = {boardId:bid};
+            var userid = [[${#authentication.principal.id}]];
+            var obj = {id:userid};
             $.ajax({
                 type : 'post',
                 url : '/dog/' + bid + '/like',

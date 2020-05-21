@@ -4,7 +4,6 @@
          layout:decorator="layout/default">
 
 <div layout:fragment="content">
-
     <section id="portfolio" class="portfolio">
         <div class="container">
             <h2 class="text-uppercase text-center text-secondary" style="margin-top: 40px;">댕댕이</h2>
@@ -16,13 +15,16 @@
                             <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" th:src="${board.thumbnailsrc}" style="min-height: 252.76px;"/>
+                    </a>
+                    <a th:href="'/dog/'+${board.id}">
                         <h5 class="text-center" th:text="${board.title}"></h5>
+                        <h6 class="text-center" th:text="'댓글 : [' + ${board.commentcount} + ']  조회 : ' +${board.hitcount}+ '  집사 : ' + ${board.writer}"></h6>
                     </a>
                 </div>
 
             </div>
 
-            <nav class="d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center" style="margin-left: -1px;margin-right: 0px;font-size: 25px;font-family: GmarketSansLight;">
+            <nav class="d-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center" style="margin-top:50px;margin-left: -1px;margin-right: 0px;font-size: 25px;font-family: GmarketSansLight;">
                 <ul id="pagination" class="pagination"
                 th:with="startNumber=${T(Math).floor(posts.number/10)}*10+1,
                         endNumber=(${posts.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${posts.totalPages}">

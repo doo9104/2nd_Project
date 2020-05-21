@@ -12,7 +12,8 @@ var login = {
     login : function () {
         var data = {
             userid : $('#userid').val(),
-            password : $('#password').val()
+            password : $('#password').val(),
+            prevpage : prevPage
         };
 
         $.ajax({
@@ -26,6 +27,8 @@ var login = {
                 alert("인증되지 않은 계정입니다."); return;
             } else if(data == "WrongInfo") {
                 alert("입력하신 아이디&비밀번호가 맞지 않습니다."); return;
+            } else {
+                window.location.href=data;
             }
         }).fail(function (error) {
             alert("error : " + JSON.stringify(error));
