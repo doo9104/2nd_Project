@@ -1,10 +1,11 @@
-package com.doo9104.project.Board_Cat.domain.entity;
+package com.doo9104.project.Board_Other.domain.entity;
 
 import com.doo9104.project.CommonEntity.TimeEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Board_Cat extends TimeEntity {
+public class Board_Other extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,12 +50,12 @@ public class Board_Cat extends TimeEntity {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "board_cat", fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 불필요하게 양쪽 테이블을 조회 하지 않도록 양쪽 모두 '지연 로딩' 방식 설정
-    private List<Comment_Cat> comments;
+    @OneToMany(mappedBy = "board_other", fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 불필요하게 양쪽 테이블을 조회 하지 않도록 양쪽 모두 '지연 로딩' 방식 설정
+    private List<Comment_Other> comments;
 
 
     @Builder
-    public Board_Cat(String title, String content, String thumbnailsrc,String writer) {
+    public Board_Other(String title, String content, String thumbnailsrc, String writer) {
         this.title = title;
         this.content = content;
         this.thumbnailsrc = thumbnailsrc;

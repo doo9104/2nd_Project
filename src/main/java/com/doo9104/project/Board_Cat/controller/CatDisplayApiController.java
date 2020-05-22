@@ -1,13 +1,12 @@
-package com.doo9104.project.Board_Dog.controller;
+package com.doo9104.project.Board_Cat.controller;
 
-import com.doo9104.project.Board_Dog.service.Board_DogService;
-import com.doo9104.project.Board_Dog.dto.DogPostResponseDto;
+
+import com.doo9104.project.Board_Cat.dto.CatPostResponseDto;
+import com.doo9104.project.Board_Cat.service.Board_CatService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,30 +20,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Controller
 @RequiredArgsConstructor
-public class DisplayApiController {
+public class CatDisplayApiController {
 
-    private final Board_DogService boardDogService;
+    private final Board_CatService boardCatService;
 
-
-    @GetMapping("/dog")
-    public String dog_show(@PageableDefault(
+    @GetMapping("/cat")
+    public String cat_show(@PageableDefault(
             size = 6 ) Pageable pageable, Model model) {
-        model.addAttribute("posts",boardDogService.findBoardList(pageable));
+        model.addAttribute("posts",boardCatService.findBoardList(pageable));
 
-        return "/pets/dog/pet_dog";
+        return "/pets/cat/pet_cat";
     }
 
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-    @GetMapping("/dog/post")
-    public String dog_post() {
-        return "/pets/dog/post";
+    @GetMapping("/cat/post")
+    public String cat_post() {
+        return "/pets/cat/post";
     }
 
-    @GetMapping("/dog/{id}")
-    public String dog_view(@PathVariable Long id, Model model, HttpServletResponse response, HttpServletRequest request) {
+    @GetMapping("/cat/{id}")
+    public String cat_view(@PathVariable Long id, Model model, HttpServletResponse response, HttpServletRequest request) {
 
         Cookie cookies[] = request.getCookies();
         Map mapCookie = new HashMap();
@@ -63,34 +60,33 @@ public class DisplayApiController {
             cookie.setMaxAge(60*60*24); // 초단위
             response.addCookie(cookie);
 
-            boardDogService.HitCountUp(id);
+            boardCatService.HitCountUp(id);
         }
 
-        DogPostResponseDto dto = boardDogService.findById(id);
+        CatPostResponseDto dto = boardCatService.findById(id);
         model.addAttribute("post",dto);
-        return "/pets/dog/view";
+        return "/pets/cat/view";
     }
 
-    @GetMapping("/dog/modify/{id}")
+    @GetMapping("/cat/modify/{id}")
     public String updateView(@PathVariable Long id, Model model) {
-        DogPostResponseDto dto = boardDogService.findById(id);
+        CatPostResponseDto dto = boardCatService.findById(id);
 
         model.addAttribute("post",dto);
 
-        return "/pets/dog/modify";
+        return "/pets/cat/modify";
     }
 
-    @GetMapping("/dog/search")
+    @GetMapping("/cat/search")
     public String searchBoardList(@RequestParam(value = "keyword") String keyword,
                                   @RequestParam(value = "type") String type,
                                   @PageableDefault(size = 6 ) Pageable pageable,
                                   Model model) {
-        model.addAttribute("posts",boardDogService.searchBoardList(pageable,type,keyword));
+        model.addAttribute("posts",boardCatService.searchBoardList(pageable,type,keyword));
         model.addAttribute("type",type);
         model.addAttribute("keyword",keyword);
 
-        return "/pets/dog/pet_dog";
+        return "/pets/cat/pet_cat";
     }
-
 
 }

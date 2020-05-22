@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
-
 @RequiredArgsConstructor
 @RequestMapping("/dog/")
 @RestController
-public class PostApiController {
+public class DogPostApiController {
 
     private final Board_DogService boardDogService;
 
 
-
+    // 글 등록
     @PostMapping("/post")
     public Long post(@RequestBody DogDto dogDto) {
         return boardDogService.save(dogDto);
     }
 
 
+    // 글 수정
     @PreAuthorize("#dogUpdateRequestDto.getWriter() == authentication.principal.username")
     @PutMapping("/post/{id}")
     public Long update(@PathVariable Long id, @RequestBody DogUpdateRequestDto dogUpdateRequestDto) {
         return boardDogService.update(id, dogUpdateRequestDto);
     }
 
+    // 글 삭제
     @DeleteMapping("/post/{id}")
     public Long delete(@PathVariable Long id) {
         boardDogService.delete(id);
@@ -44,6 +44,7 @@ public class PostApiController {
     }
 
     //@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    // 좋아요 클릭
     @PostMapping("/{id}/like")
     public int toggleLike(@PathVariable Long id, @RequestBody User user) {
 

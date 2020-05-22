@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/comments")
-public class CommentController {
+public class DogCommentController {
 
     @Autowired
     private Comment_DogRepository comment_dogRepository;
