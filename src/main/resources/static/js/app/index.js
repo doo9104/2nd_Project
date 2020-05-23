@@ -15,24 +15,25 @@ var main = {
     },
     save : function () {
         var data = {
+            boardtype : boardtype,
             title : $('#title').val(),
             writer : $('#writer').val(),
             content : $('#content').val(),
             thumbnailsrc : img
         };
 
-        console.log(data.content);
         $.ajax({
             type : 'POST',
-            url : '/dog/post',
+            url : '/'+boardtype+'/post',
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function () {
-            alert('등록되었습니다.');
-            window.location.href = '/dog';
+            bootbox.alert("등록되었습니다.", function(){
+                window.location.href = '/'+boardtype;
+            });
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            bootbox.alert(JSON.stringify(error));
         });
 
     },
@@ -48,15 +49,16 @@ var main = {
 
         $.ajax({
             type : 'PUT',
-            url : '/dog/post/'+id,
+            url : '/'+boardtype+'/post/'+id,
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data)
         }).done(function () {
-            alert('수정 되었습니다.');
-            window.location.href = '/dog';
+            bootbox.alert("수정되었습니다.", function(){
+                window.location.href = '/'+boardtype;
+            });
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            bootbox.alert(JSON.stringify(error));
         });
     },
 
@@ -65,14 +67,15 @@ var main = {
 
         $.ajax({
             type : 'DELETE',
-            url : '/dog/post/'+id,
+            url : '/'+boardtype+'/post/'+id,
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
         }).done(function () {
-            alert('삭제되었습니다.');
-            window.location.href = '/dog';
+            bootbox.alert("삭제되었습니다.", function(){
+                window.location.href = '/'+boardtype;
+            });
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            bootbox.alert(JSON.stringify(error));
         });
     }
 

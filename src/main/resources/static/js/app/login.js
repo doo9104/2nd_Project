@@ -24,15 +24,14 @@ var login = {
             data : JSON.stringify(data)
         }).done(function (data) {
             if(data == "NotAuth") {
-                alert("인증되지 않은 계정입니다."); return;
-            } else if(data == "WrongInfo") {
-                alert("입력하신 아이디&비밀번호가 맞지 않습니다."); return;
+                    alert("인증되지 않은 계정입니다.");
+                } else if(data == "WrongInfo") {
+                    alert("입력하신 아이디&비밀번호가 맞지 않습니다.");
             } else {
                 window.location.href=data;
             }
         }).fail(function (error) {
-            alert("error : " + JSON.stringify(error));
-            console.log(JSON.stringify(error));
+            bootbox.alert("error : " + JSON.stringify(error));
         });
 
     }

@@ -1,17 +1,16 @@
 var commentsmanager = (function () {
-    var getAll = function (obj, callback) {
-        console.log("getting all...");
 
-        $.getJSON('/comments/dog/'+obj, callback);
+    var getAll = function (obj, callback) {
+
+        $.getJSON('/comments/'+boardtype+'/'+obj, callback);
     };
 
     // 댓글 추가
     var add = function (obj, callback) {
-        console.log("adding comment...");
 
         $.ajax({
             type : 'post',
-            url : '/comments/dog/' + obj.id,
+            url : '/comments/'+boardtype+'/' + obj.id,
             data : JSON.stringify(obj),
             dataType : 'json',
             contentType: "application/json",
@@ -21,11 +20,10 @@ var commentsmanager = (function () {
 
     //댓글 삭제
     var remove = function (obj, callback) {
-        console.log("deleting comment...");
 
         $.ajax({
             type:'delete',
-            url: '/comments/dog/'+ obj.bid+"/" + obj.cid,
+            url: '/comments/'+boardtype+'/'+ obj.bid+"/" + obj.cid,
             dataType:'json',
             contentType: "application/json",
             success:callback
@@ -34,11 +32,10 @@ var commentsmanager = (function () {
 
     // 댓글 수정
     var update = function (obj, callback) {
-        console.log("updating comment....");
 
         $.ajax({
             type:'put',
-            url: '/comments/dog/'+ obj.bid,
+            url: '/comments/'+boardtype+'/'+ obj.bid,
             dataType:'json',
             data: JSON.stringify(obj),
             contentType: "application/json",

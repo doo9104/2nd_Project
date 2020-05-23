@@ -1,6 +1,6 @@
 package com.doo9104.project.Controller;
 
-import com.doo9104.project.Board_Dog.service.Board_DogService;
+import com.doo9104.project.Board.service.Board_Service;
 import com.doo9104.project.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    private final Board_DogService boardDogService;
+    private final Board_Service boardDogService;
     private final JwtUtil jwtUtil;
 
     @GetMapping("/")

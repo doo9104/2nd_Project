@@ -1,9 +1,9 @@
 package com.doo9104.project.web;
 
-import com.doo9104.project.Board_Dog.domain.entity.Board_Dog;
-import com.doo9104.project.Board_Dog.domain.entity.Board_DogRepository;
-import com.doo9104.project.Board_Dog.dto.DogDto;
-import com.doo9104.project.Board_Dog.dto.DogUpdateRequestDto;
+import com.doo9104.project.Board.domain.entity.Board;
+import com.doo9104.project.Board.domain.entity.Board_Repository;
+import com.doo9104.project.Board.dto.BoardDto;
+import com.doo9104.project.Board.dto.BoardUpdateRequestDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.After;
@@ -31,7 +31,7 @@ public class PostApiControllerTest {
     private int port;
 
     @Autowired
-    private Board_DogRepository boardDogRepository;
+    private Board_Repository boardDogRepository;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -47,7 +47,7 @@ public class PostApiControllerTest {
 
         String title = "title";
         String content = "content";
-        DogDto dogDto = DogDto.builder()
+        BoardDto boardDto = BoardDto.builder()
                 .title(title)
                 .content(content)
                 .writer("author")
@@ -56,12 +56,12 @@ public class PostApiControllerTest {
         String url = "http://localhost:" + port + "/post";
 
         //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url,dogDto,Long.class);
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, boardDto,Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
-        List<Board_Dog> all = boardDogRepository.findAll();
+        List<Board> all = boardDogRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
     }
@@ -69,7 +69,7 @@ public class PostApiControllerTest {
     @Test
     public void 수정() throws Exception {
         //given
-        Board_Dog savedPosts = boardDogRepository.save(Board_Dog.builder()
+        Board savedPosts = boardDogRepository.save(Board.builder()
                 .title("title")
                 .content("content")
                 .writer("writer")
@@ -79,20 +79,20 @@ public class PostApiControllerTest {
         String expectedTitle = "modifiedTitle";
         String expectedContent = "modifiedContent";
 
-        DogUpdateRequestDto dogUpdateRequestDto = DogUpdateRequestDto.builder()
+        BoardUpdateRequestDto boardUpdateRequestDto = BoardUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
                 .build();
 
         String url = "http://localhost:" + port + "/post/" + updateId;
 
-        HttpEntity<DogUpdateRequestDto> requestEntity = new HttpEntity<>(dogUpdateRequestDto);
+        HttpEntity<BoardUpdateRequestDto> requestEntity = new HttpEntity<>(boardUpdateRequestDto);
 
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
-        List<Board_Dog> all = boardDogRepository.findAll();
+        List<Board> all = boardDogRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
 
