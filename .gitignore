@@ -4,6 +4,7 @@
 /build/classes/java/main/
 application.properties
 /src/main/resources/application.properties
+/src/main/resources/application-oauth.properties
 /src/main/resources/
 /etc/
-/src/main/resources/application.properties
+

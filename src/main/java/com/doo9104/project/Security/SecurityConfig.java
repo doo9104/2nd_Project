@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .authorizeRequests()
-                /*.antMatchers("/dog/post").hasAnyRole("ADMIN","USER")*/
+                .antMatchers("/dog/post","/cat/post","/other/post").hasAnyRole("ADMIN","USER")
                 .antMatchers("/user/").hasRole("USER")
                 .anyRequest().permitAll() // 그외 나머지 요청은 누구나 접근 가능
                 .antMatchers("/","/login","/join","/dog").permitAll()

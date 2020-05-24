@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class BoardDisplayApiController {
         return "/board/list";
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{type}/post")
     public String dog_post(@PathVariable Board.BoardType type) {
         return "/board/post";
@@ -56,11 +57,11 @@ public class BoardDisplayApiController {
             }
         }
 
-        String cookie_hit_count = (String) mapCookie.get("hit_count");
+        String cookie_hit_count = (String) mapCookie.get(type + "_hit");
         String new_cookie_hit_count = "|" + id;
 
         if ( StringUtils.indexOfIgnoreCase(cookie_hit_count, new_cookie_hit_count) == -1 ) {
-            Cookie cookie = new Cookie("hit_count", cookie_hit_count + new_cookie_hit_count);
+            Cookie cookie = new Cookie(type+"_hit", cookie_hit_count + new_cookie_hit_count);
             cookie.setMaxAge(60*60*24); // 초단위
             response.addCookie(cookie);
 
