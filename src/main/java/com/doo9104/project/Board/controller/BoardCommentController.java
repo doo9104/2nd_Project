@@ -1,8 +1,9 @@
 package com.doo9104.project.Board.controller;
 
 import com.doo9104.project.Board.domain.entity.Board;
+import com.doo9104.project.Board.domain.entity.BoardType;
 import com.doo9104.project.Board.domain.entity.Board_Comment;
-import com.doo9104.project.Board.domain.entity.Board_CommentRepository;
+import com.doo9104.project.Board.domain.repository.Board_CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class BoardCommentController {
     }
 
     @GetMapping("/{type}/{id}")
-    public ResponseEntity<List<Board_Comment>> getComment(@PathVariable("id") Long id, @PathVariable Board.BoardType type) {
+    public ResponseEntity<List<Board_Comment>> getComment(@PathVariable("id") Long id, @PathVariable BoardType type) {
         Board board = new Board();
         board.SetBoardId(id);
         return ResponseEntity.ok(getListByBoard(board));
@@ -40,7 +41,7 @@ public class BoardCommentController {
 
     @Transactional
     @PostMapping("/{type}/{id}")
-    public ResponseEntity<List<Board_Comment>> addComment(@PathVariable("id") Long id, @RequestBody Board_Comment board_comment, @PathVariable Board.BoardType type) {
+    public ResponseEntity<List<Board_Comment>> addComment(@PathVariable("id") Long id, @RequestBody Board_Comment board_comment, @PathVariable BoardType type) {
         Board board = new Board();
         board.SetBoardId(id);
 
@@ -54,7 +55,7 @@ public class BoardCommentController {
 
     @Transactional
     @DeleteMapping("/{type}/{bid}/{cid}")
-    public ResponseEntity<List<Board_Comment>> deleteComment(@PathVariable("bid") Long bid, @PathVariable("cid") Long cid, @PathVariable Board.BoardType type) {
+    public ResponseEntity<List<Board_Comment>> deleteComment(@PathVariable("bid") Long bid, @PathVariable("cid") Long cid, @PathVariable BoardType type) {
 
         boardCommentRepository.deleteById(cid);
         boardCommentRepository.CommentCountDown(bid);
@@ -68,7 +69,7 @@ public class BoardCommentController {
 
     @Transactional
     @PutMapping("/{type}/{bid}") /*게시물 번호*/
-    public ResponseEntity<List<Board_Comment>> modifyComment(@PathVariable("bid") Long bid, @RequestBody Board_Comment board_comment, @PathVariable Board.BoardType type) {
+    public ResponseEntity<List<Board_Comment>> modifyComment(@PathVariable("bid") Long bid, @RequestBody Board_Comment board_comment, @PathVariable BoardType type) {
         //값이 있으면 코드 블록을 실행 함
         boardCommentRepository.findById(board_comment.getId()).ifPresent(origin -> {
             origin.SetCommentContent(board_comment.getContent());

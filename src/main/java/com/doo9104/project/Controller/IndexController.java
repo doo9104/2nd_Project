@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    private final Board_Service boardDogService;
+    private final Board_Service boardService;
     private final JwtUtil jwtUtil;
 
     @GetMapping("/")
@@ -32,6 +32,7 @@ public class IndexController {
         System.out.println("현재 사용자 : " + curUser);
         model.addAttribute("curUser", curUser);
         }
+        model.addAttribute("top6",boardService.findTop6());
         return "index";
     }
 

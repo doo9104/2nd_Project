@@ -1,9 +1,12 @@
 package com.doo9104.project.Board.service;
 
-import com.doo9104.project.Board.domain.entity.Board_Repository;
+import com.doo9104.project.Board.domain.entity.BoardType;
+import com.doo9104.project.Board.domain.entity.TopView;
+import com.doo9104.project.Board.domain.repository.Board_Repository;
 import com.doo9104.project.Board.domain.entity.Board;
 import com.doo9104.project.Board.domain.entity.Board_Like;
-import com.doo9104.project.Board.domain.entity.Board_LikeRepository;
+import com.doo9104.project.Board.domain.repository.Board_LikeRepository;
+import com.doo9104.project.Board.domain.repository.TopViewRepository;
 import com.doo9104.project.CommonEntity.IsUse;
 import com.doo9104.project.Board.dto.BoardDto;
 import com.doo9104.project.Board.dto.BoardListResponseDto;
@@ -30,6 +33,8 @@ public class Board_Service {
     private final UserRepository userRepository;
 
     private final Board_LikeRepository boardLikeRepository;
+    private final TopViewRepository topViewRepository;
+
 
 
 
@@ -41,9 +46,8 @@ public class Board_Service {
 
 
     // 게시판 리스트
-    public Page<Board> findBoardList(Pageable pageable,Board.BoardType type) {
+    public Page<Board> findBoardList(Pageable pageable, BoardType type) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(),new Sort(Sort.Direction.DESC, "id"));
-        System.out.println("!!type : " + type.name());
         return boardRepository.findAllByBoardtype(pageable,type);
     }
 
@@ -128,7 +132,7 @@ public class Board_Service {
     }
 
     // 검색
-    public Page<Board> searchBoardList(Pageable pageable, String type, String keyword, Board.BoardType boardtype) {
+    public Page<Board> searchBoardList(Pageable pageable, String type, String keyword, BoardType boardtype) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(),new Sort(Sort.Direction.DESC, "id"));
 
         if (type.equals("T")) {
@@ -147,6 +151,11 @@ public class Board_Service {
     // 조회수 증가
     public void HitCountUp(Long id) {
         boardRepository.HitCountUp(id);
+    }
+
+    // TOP 6 가져오기
+    public List<TopView> findTop6() {
+        return topViewRepository.findAll();
     }
 
 }

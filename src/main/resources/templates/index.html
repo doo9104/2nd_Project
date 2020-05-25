@@ -16,45 +16,26 @@
     </header>
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="text-uppercase text-center text-secondary">이번주 인기 애완동물</h2>
+            <h2 class="text-uppercase text-center text-secondary">오늘의 인기 애완동물</h2>
+            <h5 class="text-uppercase text-center text-secondary">매일 0시에 갱신됩니다.</h5>
             <hr class="star-dark mb-5">
             <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-1">
+
+
+                <div th:each="topviews : ${top6}" class="col-md-6 col-lg-4">
+                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" th:href="'/'+${topviews.boardtype}+'/'+${topviews.board.id}">
                         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
                             <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/cabin.png"/></a>
+                        </div>
+                        <img class="img-fluid" th:src="${topviews.thumbnailsrc}"/></a>
+                         <a th:href="'/'+${topviews.boardtype}+'/'+${topviews.board.id}">
+                        <h5 class="text-center" th:text="${topviews.title}"></h5>
+                         </a>
+                    <!--</a>-->
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-2">
-                        <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                            <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/cake.png"></a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-3">
-                        <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                            <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/circus.png"></a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-4">
-                        <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                            <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/game.png"></a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-5">
-                        <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                            <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/safe.png"></a>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <a class="d-block mx-auto portfolio-item" data-toggle="modal" href="#portfolio-modal-6">
-                        <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
-                            <div class="my-auto portfolio-item-caption-content w-100 text-center text-white"><i class="fa fa-search-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="/assets/img/portfolio/submarine.png"></a>
-                </div>
+
+
+
             </div>
         </div>
     </section>

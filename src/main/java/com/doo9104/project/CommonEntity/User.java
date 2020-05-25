@@ -49,6 +49,7 @@ public class User extends TimeEntity implements UserDetails {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
+    // 이메일 인증 여부
     @Enumerated(EnumType.STRING)
     private IsUse isUse;
 

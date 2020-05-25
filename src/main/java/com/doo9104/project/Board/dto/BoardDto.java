@@ -1,6 +1,7 @@
 package com.doo9104.project.Board.dto;
 
 import com.doo9104.project.Board.domain.entity.Board;
+import com.doo9104.project.Board.domain.entity.BoardType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 public class BoardDto {
 
     private Long id;
-    private Board.BoardType boardtype;
+    private BoardType boardtype;
     private String writer;
     private String title;
     private String content;
@@ -21,7 +22,7 @@ public class BoardDto {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public BoardDto(Board.BoardType boardtype,String title, String content, String writer, String thumbnailsrc, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(BoardType boardtype,String title, String content, String writer, String thumbnailsrc, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.boardtype = boardtype;
         this.writer = writer;
         this.title = title;

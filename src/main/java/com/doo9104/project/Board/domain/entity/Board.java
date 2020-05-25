@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.CascadeType;
@@ -55,9 +56,7 @@ public class Board extends TimeEntity {
     private int commentcount;
 
 
-    public enum BoardType {
-        dog,cat,other;
-    }
+
 
 
     @JsonIgnore

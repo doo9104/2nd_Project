@@ -1,5 +1,7 @@
-package com.doo9104.project.Board.domain.entity;
+package com.doo9104.project.Board.domain.repository;
 
+import com.doo9104.project.Board.domain.entity.Board;
+import com.doo9104.project.Board.domain.entity.Board_Comment;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

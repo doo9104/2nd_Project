@@ -1,5 +1,7 @@
-package com.doo9104.project.Board.domain.entity;
+package com.doo9104.project.Board.domain.repository;
 
+import com.doo9104.project.Board.domain.entity.Board_Like;
+import com.doo9104.project.Board.domain.entity.Board_Like_Id;
 import com.doo9104.project.CommonEntity.IsUse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
