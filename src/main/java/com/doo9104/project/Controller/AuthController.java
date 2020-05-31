@@ -5,6 +5,7 @@ import com.doo9104.project.CommonEntity.IsUse;
 import com.doo9104.project.CommonEntity.User;
 import com.doo9104.project.CommonEntity.UserRepository;
 import com.doo9104.project.Service.EmailService;
+import com.doo9104.project.Service.UserService;
 import com.doo9104.project.Util.JwtUtil;
 import com.doo9104.project.Util.TempKey;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +32,16 @@ public class AuthController {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final EmailService emailService;
+    private final UserService userService;
 
 
 
     // 회원가입
     @PostMapping("/join")
     public String join(@RequestBody Map<String, String> user) {
+        // 중복검사
+        userService.validateDuplicateMember(user.get("userid"));
+
         // 받아온 이메일로 인증메일을 보낸다
         String mailSubject = "PSMP - 회원가입 인증 이메일";
         String mailReceiver = user.get("email");
@@ -56,6 +61,8 @@ public class AuthController {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
+
 
         return userRepository.save(User.builder()
                 .email(user.get("email"))

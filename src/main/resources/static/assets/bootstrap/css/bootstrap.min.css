@@ -523,6 +523,10 @@ pre code {
     .container {
         max-width: 720px
     }
+    .d-md-block {
+            display: block!important;
+    }
+
 }
 
 @media (min-width: 992px) {
@@ -4826,6 +4830,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .pagination {
+    justify-content: center;
     display: -ms-flexbox;
     display: flex;
     padding-left: 0;
@@ -10610,3 +10615,43 @@ a:active, a:focus, a:hover {
     background-color: #1a252f;
     border-color: #1a252f
 }
+
+/*//////////////////////////*/
+.btn.btn-link.d-md-none.filter-collapse {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 30px;
+    border-radius: 0;
+    text-align: left;
+}
+
+.products {
+    padding: 0;
+}
+
+.product-item {
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid #e8e6e6;
+    height: 100%;
+}
+
+.product-image {
+    margin-bottom: 20px;
+}
+
+.text-center.text-sm-center.text-md-center.text-lg-center.text-xl-center.product-name {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.d-flex.justify-content-between.align-items-center.product-about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-item {
+}
+

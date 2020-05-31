@@ -53,10 +53,10 @@ var join = {
                 $('body').loading('stop');
             }
         }).done(function () {
-            bootbox.alert('인증을 위한 이메일이 발송되었습니다. 메일을 확인해주세요.');
-            //window.location.href = '/login';
+            alert('인증을 위한 이메일이 발송되었습니다. 메일을 확인해주세요.');
+            window.location.href = '/';
         }).fail(function (error) {
-            bootbox.alert(JSON.stringify(error));
+            alert(JSON.stringify(error));
         });
 
     }

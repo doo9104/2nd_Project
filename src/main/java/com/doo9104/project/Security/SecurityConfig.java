@@ -1,4 +1,4 @@
-package com.doo9104.project.config;
+package com.doo9104.project.Security;
 
 import com.doo9104.project.Filter.JwtFilter;
 import com.doo9104.project.Util.JwtUtil;
@@ -69,6 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
+
+                /*.and()
+                .exceptionHandling().accessDeniedPage("/denied")*/
 
                 .and()
                 .addFilterBefore(new JwtFilter(jwtUtil),

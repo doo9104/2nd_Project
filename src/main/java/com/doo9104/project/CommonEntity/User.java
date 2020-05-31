@@ -1,5 +1,7 @@
 package com.doo9104.project.CommonEntity;
 
+import com.doo9104.project.Shop.domain.entity.Address;
+import com.doo9104.project.Shop.domain.entity.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +22,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,8 +37,8 @@ import java.util.stream.Collectors;
 @Entity
 public class User extends TimeEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(length = 300, nullable = false, unique = true)
@@ -56,6 +61,12 @@ public class User extends TimeEntity implements UserDetails {
     @Column(length = 50)
     private String authkey;
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<Order>();
+
+    @Embedded
+    private Address address;
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -68,6 +79,11 @@ public class User extends TimeEntity implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+
+
+    //////////////////////////////////////////////////////////
+    //getter .. setter..
+    //////////////////////////////////////////////////////////
     public void accountActive(IsUse isUse,String authkey) {
         this.isUse = isUse.inverse();
         this.authkey = null;

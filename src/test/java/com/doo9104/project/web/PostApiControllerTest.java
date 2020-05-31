@@ -1,7 +1,7 @@
 package com.doo9104.project.web;
 
 import com.doo9104.project.Board.domain.entity.Board;
-import com.doo9104.project.Board.domain.entity.Board_Repository;
+import com.doo9104.project.Board.domain.repository.Board_Repository;
 import com.doo9104.project.Board.dto.BoardDto;
 import com.doo9104.project.Board.dto.BoardUpdateRequestDto;
 import org.junit.Test;
