@@ -520,12 +520,10 @@ pre code {
 }
 
 @media (min-width: 768px) {
-    .container {
-        max-width: 720px
-    }
     .d-md-block {
             display: block!important;
     }
+
 
 }
 
@@ -10655,3 +10653,19 @@ a:active, a:focus, a:hover {
 .product-item {
 }
 
+@media (min-width:768px) {
+    .filters {
+        padding-top: 30px;
+    }
+}
+
+
+
+.filters {
+    padding-left: 40px;
+    padding-top: 10px;
+}
+
+.filters .filter-item {
+    margin-bottom: 40px;
+}

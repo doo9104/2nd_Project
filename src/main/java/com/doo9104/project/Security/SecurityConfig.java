@@ -4,6 +4,7 @@ import com.doo9104.project.Filter.JwtFilter;
 import com.doo9104.project.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -76,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new JwtFilter(jwtUtil),
                         UsernamePasswordAuthenticationFilter.class);
-        // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
+                // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
 
 
 

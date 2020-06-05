@@ -45,7 +45,7 @@ public class Board_Service {
     }
 
 
-    // 게시판 리스트
+    // 게시판 페이징 리스트
     public Page<Board> findBoardList(Pageable pageable, BoardType type) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(),new Sort(Sort.Direction.DESC, "id"));
         return boardRepository.findAllByBoardtype(pageable,type);
